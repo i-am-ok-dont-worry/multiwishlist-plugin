@@ -32,5 +32,9 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.1.0"
+  },
+  "dependencies": {
+    "magento-search-criteria-builder": "https://github.com/i-am-ok-dont-worry/magento-searchcriteria-builder.git",
+    "validatorjs": "^3.22.1"
   }
 }
