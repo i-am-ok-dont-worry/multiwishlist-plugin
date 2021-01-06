@@ -4,8 +4,6 @@ class WishlistDataValidator {
   validate () {
     const rules = {
       customer_id: 'required',
-      shared: 'required',
-      sharing_code: 'required',
       name: 'required',
       type: 'required'
     };
