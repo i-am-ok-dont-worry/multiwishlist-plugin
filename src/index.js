@@ -1,5 +1,5 @@
 const SearchCriteria = require('magento-search-criteria-builder');
-const Validator = require('./validator/order-data-validator');
+const Validator = require('./validator/multiwishlist-validator');
 
 /**
  * Plugin allows to handle multiwishlist features
@@ -34,7 +34,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
 
       module.createWishlist = (wishlist, token) => {
         const url = `/amasty_mWishlist/wishlist`;
-        return restClient.post(url, wishlist, token);
+        return restClient.post(url, { wishlist }, token);
       };
 
       module.updateWishlist = (wishlistId, wishlist, token) => {
@@ -45,8 +45,12 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
       module.deleteWishlist = (wishlistId, token) => {
         const url = `/amasty_mWishlist/wishlist/${wishlistId}`;
         return restClient.delete(url, token);
-      }
+      };
+
+      return module;
     });
+
+    return client;
   };
 
   /**
@@ -60,8 +64,8 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     try {
       new Validator(wishlistData).validate();
       client.multiwishlist.createWishlist(wishlistData, token)
-        .then(response => apiStatus(res, response, 200))
-        .catch(err => apiError(res, err));
+          .then(response => apiStatus(res, response, 200))
+          .catch(err => apiError(res, err));
     } catch (e) {
       apiError(res, e);
     }
@@ -97,8 +101,8 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     try {
       if (!wishlistId) { throw new Error('Wishlist id is required'); }
       client.multiwishlist.getMultiwishlist(wishlistId, token)
-        .then(response => apiStatus(res, response, 200))
-        .catch(err => apiError(res, err));
+          .then(response => apiStatus(res, response, 200))
+          .catch(err => apiError(res, err));
     } catch (e) {
       apiError(res, e);
     }
@@ -143,7 +147,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
 
   return {
     domainName: '@grupakmk',
-    pluginName: 'multiwishlist-plugin',
+    pluginName: 'multiwishlist',
     route: '/multiwishlist',
     router
   };
