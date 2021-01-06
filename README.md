@@ -8,7 +8,7 @@ compatible with [Magento Amasty Multiple Wishlist plugin](https://amasty.com/mul
 
 
 ## REST endpoints
-Plugin exposes 4 rest endpoints for basic CRUD operations:
+Plugin exposes rest endpoints for basic CRUD operations:
 
 * `GET /vendor/multiwishlist/{{customerId}}` - returns list of customer multiwishlists
 * `GET /vendor/multiwishlist/single/{{wishlistId}}` - returns single wishlist
