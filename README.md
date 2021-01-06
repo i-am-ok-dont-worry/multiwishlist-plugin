@@ -1,24 +1,25 @@
-# Plugin template
-This repository is a template for VueStorefrontApi plugin.
+# Multiwishlist plugin
+The wishlist extension provides functionality for listing and maintaining 
+items a customer would like to have, for example products intended 
+for buying or desired as gifts.
 
-## Entry point
-Entry point for plugin is a /src/index.js file. It contains a template function
-for api plugin.
+Note that this plugin allows to handle multiwishlists per customer and is 
+compatible with [Magento Amasty Multiple Wishlist plugin](https://amasty.com/multiple-wishlist-for-magento-2.html).
 
-## Write a plugin
-Plugin receives various props including:
-* config - api configuration
-* db - elasticsearch client
-* router - express router
-* cache - cache manager instance
-* apiStatus - rest api response helper func
-* apiError - rest api error response helper func
-* getRestApiClient - method which returns Magento Rest Client
 
-# IMPORTANT!
-- `package.json` must contain `pluginname` entry which describes plugin name
-- `package.json` must contain valid company info e.g.:
-```
-"companyname": "grupakmk"
-```
+## REST endpoints
+Plugin exposes 4 rest endpoints for basic CRUD operations:
 
+* `GET /vendor/multiwishlist/{{customerId}}` - returns list of customer multiwishlists
+* `GET /vendor/multiwishlist/single/{{wishlistId}}` - returns single wishlist
+* `POST /vendor/multiwishlist` - creates wishlist
+* `POST /vendor/multiwishlist/{{wishlistId}}` - updates wishlist
+* `DELETE /vendor/multiwishlist/{{wishlistId}}` - deletes wishlist
+
+## Filtering wishlists list
+Wishlists list can be filtered and sorted via additional query parameters on 
+endpoint `GET /vendor/multiwishlist/${customerId}`:
+* pageSize - `{number}`
+* currentPage - `{number}`
+* sortBy - field by which list will be sorted
+* sortDir - sort direction `{asc|desc}`
