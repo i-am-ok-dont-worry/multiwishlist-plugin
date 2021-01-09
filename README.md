@@ -11,15 +11,12 @@ compatible with [Magento Amasty Multiple Wishlist plugin](https://amasty.com/mul
 Plugin exposes rest endpoints for basic CRUD operations:
 
 * `GET /vendor/multiwishlist/{{customerId}}` - returns list of customer multiwishlists
-* `GET /vendor/multiwishlist/single/{{wishlistId}}` - returns single wishlist
-* `POST /vendor/multiwishlist` - creates wishlist
-* `POST /vendor/multiwishlist/{{wishlistId}}` - updates wishlist
+* `GET /vendor/multiwishlist/single/{{wishlistId}}` - returns a single wishlist
+* `POST /vendor/multiwishlist` - creates a wishlist
 * `DELETE /vendor/multiwishlist/{{wishlistId}}` - deletes wishlist
+* `PUT /vendor/multiwishlist/{{wishlistId}}/add/{{productId}}` - adds product to a wishlist
+* `DELETE /vendor/multiwishlist/remove/{{itemId}}` - removes item from a wishlist
 
-## Filtering wishlists list
-Wishlists list can be filtered and sorted via additional query parameters on 
-endpoint `GET /vendor/multiwishlist/${customerId}`:
-* pageSize - `{number}`
-* currentPage - `{number}`
-* sortBy - field by which list will be sorted
-* sortDir - sort direction `{asc|desc}`
+## Interface
+Wishlists endpoints operates on and returns full mutated 
+[Wishlist](https://gitlab.grupakmk.pl/internal/frontend/api/addons/libstorefront-addons/libstorefront-multiwishlist-plugin/-/blob/master/src/types/index.ts) object.

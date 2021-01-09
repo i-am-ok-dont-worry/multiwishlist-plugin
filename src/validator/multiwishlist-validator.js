@@ -4,8 +4,7 @@ class WishlistDataValidator {
   validate () {
     const rules = {
       customer_id: 'required',
-      name: 'required',
-      type: 'required'
+      name: 'required'
     };
 
     let validation = new Validator(this.wishlistData, rules);
