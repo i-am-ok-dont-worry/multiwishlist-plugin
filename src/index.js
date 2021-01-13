@@ -23,7 +23,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
             };
 
             module.getMultiwishlist = (wishlistId, token) => {
-                const url = `/kmk-multi-wishlist/wishlist/${wishlistId}`;
+                const url = `/kmk-multi-wishlist/wishlist/${wishlistId}?withItems=true`;
                 return restClient.get(url, token);
             };
 
@@ -89,7 +89,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
                         if (single.hasOwnProperty('items') && single.items instanceof Array) {
                             const decorator = new ElasticsearchProductMapper(db, config, storeCode);
                             const items = await decorator.decorateProducts(single.items, 'product_id');
-                            apiStatus(res, {...response, items: items && items instanceof Array ? items : response.items}, 200);
+                            apiStatus(res, { ...single, items: items && items instanceof Array ? items : response.items }, 200);
                         } else {
                             apiStatus(res, { ...single, items: [] }, 200);
                         }
